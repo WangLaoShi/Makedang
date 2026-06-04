@@ -1,0 +1,11 @@
+{
+  "name": "makedang",
+  "version": "1.0.0",
+  "description": "markdown.com.cn 在线 Markdown 编辑器本地复刻",
+  "private": true,
+  "scripts": {
+    "start": "cd editor && python3 -m http.server 3000",
+    "dev": "cd editor && python3 -m http.server 3000"
+  },
+  "license": "MIT"
+}
