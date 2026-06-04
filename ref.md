@@ -19,11 +19,11 @@
 
 | 本仓库路径 | 原版 URL | 说明 |
 |------------|----------|------|
-| `editor/index.html` | `/editor/index.html` | 页面结构、工具栏、侧边栏、弹窗 |
-| `editor/css/style.css` | `/editor/css/style.css` | 布局、主题变量、预览区样式 |
-| `editor/js/main.js` + 模块 | `/editor/js/app.js` | 业务逻辑（由原单文件拆分为 ES 模块） |
-| `editor/favicon.ico` | `/editor/favicon.ico` | 站点图标 |
-| `editor/vendor/*` | 各 CDN 地址 | 见下文「第三方依赖」 |
+| `docs/index.html` | `/editor/index.html` | 页面结构、工具栏、侧边栏、弹窗 |
+| `docs/css/style.css` | `/editor/css/style.css` | 布局、主题变量、预览区样式 |
+| `docs/js/main.js` + 模块 | `/editor/js/app.js` | 业务逻辑（由原单文件拆分为 ES 模块） |
+| `docs/favicon.ico` | `/editor/favicon.ico` | 站点图标 |
+| `docs/vendor/*` | 各 CDN 地址 | 见下文「第三方依赖」 |
 
 ### 2.1 JavaScript 模块职责
 
@@ -49,7 +49,7 @@
 
 **本地化改动（功能等价）：**
 
-- 将 CDN 脚本/样式改为 `editor/vendor/` 下本地文件
+- 将 CDN 脚本/样式改为 `docs/vendor/` 下本地文件
 - Mermaid 使用完整 `node_modules/mermaid/dist` 拷贝（含 `chunks/`，否则 ESM 无法加载）
 - `app.js` 中 Mermaid、Highlight、KaTeX 的 URL 指向本地路径
 
@@ -66,7 +66,7 @@
 | 项目 | [markedjs/marked](https://github.com/markedjs/marked) |
 | 版本 | **12.0.0** |
 | 许可证 | MIT |
-| 本仓库路径 | `editor/vendor/marked/marked.min.js` |
+| 本仓库路径 | `docs/vendor/marked/marked.min.js` |
 | 原版 CDN | `https://fastly.jsdelivr.net/npm/marked@12.0.0/marked.min.js` |
 | 用途 | 将 Markdown 转为 HTML；自定义 `Renderer`（代码块、表格、标题 id、Callout、==高亮== 扩展） |
 
@@ -77,7 +77,7 @@
 | 项目 | [cure53/DOMPurify](https://github.com/cure53/DOMPurify) |
 | 版本 | **3.x**（本仓库为 3.2.4 构建） |
 | 许可证 | Apache-2.0 / MPL-2.0 |
-| 本仓库路径 | `editor/vendor/dompurify/purify.min.js` |
+| 本仓库路径 | `docs/vendor/dompurify/purify.min.js` |
 | 原版 CDN | `https://fastly.jsdelivr.net/npm/dompurify@3/dist/purify.min.js` |
 | 用途 | 预览 HTML 消毒；为 KaTeX 输出放行 `mjx-*`、`math` 等标签 |
 
@@ -88,7 +88,7 @@
 | 项目 | [highlightjs/highlight.js](https://github.com/highlightjs/highlight.js) |
 | 版本 | **11.9.0** |
 | 许可证 | BSD-3-Clause |
-| 本仓库路径 | `editor/vendor/highlight.js/highlight.min.js` |
+| 本仓库路径 | `docs/vendor/highlight.js/highlight.min.js` |
 | 主题 CSS | `github.min.css` / `github-dark.min.css` |
 | 原版 CDN | `@highlightjs/cdn-assets@11.9.0`（jsdelivr）；主题曾用 bootcdn |
 | 用途 | fenced code 块语法高亮；预览区「复制」按钮 |
@@ -100,7 +100,7 @@
 | 项目 | [KaTeX/KaTeX](https://github.com/KaTeX/KaTeX) |
 | 版本 | **0.16.9** |
 | 许可证 | MIT |
-| 本仓库路径 | `editor/vendor/katex/katex.min.css`、`katex.min.js`、`auto-render.min.js` |
+| 本仓库路径 | `docs/vendor/katex/katex.min.css`、`katex.min.js`、`auto-render.min.js` |
 | 原版 CDN | `fastly.jsdelivr.net/npm/katex@0.16.9/...` |
 | 用途 | 行内 `$...$` 与块级 `$$...$$` 公式渲染（`renderMathInElement`） |
 
@@ -111,7 +111,7 @@
 | 项目 | [mermaid-js/mermaid](https://github.com/mermaid-js/mermaid) |
 | 版本 | **11.15.0** |
 | 许可证 | MIT |
-| 本仓库路径 | `editor/vendor/mermaid/`（完整 `dist`，含 `mermaid.esm.min.mjs` 与 `chunks/`） |
+| 本仓库路径 | `docs/vendor/mermaid/`（完整 `dist`，含 `mermaid.esm.min.mjs` 与 `chunks/`） |
 | 原版 CDN | `cdn.jsdelivr.net/npm/mermaid@11.15.0/dist/mermaid.esm.min.mjs`（动态 `import()`） |
 | 用途 | flowchart、sequence、gantt、class、state、pie、mindmap 等；支持 `seq`/`gantt` 别名与简化时序语法 |
 
@@ -185,8 +185,8 @@
 
 ## 8. 运行与部署
 
-1. **开发：** `npm start` → 静态服务 `editor/` 目录  
-2. **GitHub Pages：** Settings → Pages → Branch `main`，Folder **`/editor`**（详见 README）  
+1. **开发：** `npm start` → 静态服务 `docs/` 目录  
+2. **GitHub Pages：** Settings → Pages → Branch `main`，Folder **`/docs`**（GitHub 仅支持 `/` 或 `/docs`）  
 3. **资源路径：** `config.js` 中 `asset()` / `MERMAID_MODULE` 使用 `import.meta.url` 解析，自动适配 `https://user.github.io/RepoName/` 子目录，无需手写 base path
 
 ---
@@ -198,7 +198,7 @@
 | https://markdown.com.cn/ | Logo 返回首页 |
 | https://markdown.com.cn/wechat/ | 微信排版工具 |
 
-可在 `editor/index.html` 中改为自有域名。
+可在 `docs/index.html` 中改为自有域名。
 
 ---
 
@@ -216,8 +216,8 @@
 
 ```bash
 npm install mermaid@<version> --no-save
-rm -rf editor/vendor/mermaid
-cp -R node_modules/mermaid/dist editor/vendor/mermaid
+rm -rf docs/vendor/mermaid
+cp -R node_modules/mermaid/dist docs/vendor/mermaid
 ```
 
 并同步修改 `app.js` 中的 `import()` 路径（若文件名变更）。
